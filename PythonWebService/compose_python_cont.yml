@@ -1,0 +1,39 @@
+# Un-comment the 'version' field if you get an 'unsupported Compose file version: 1.0' ERROR
+# version: '3.8'
+
+networks:
+  counter-net:                          # Define a network
+  
+services:
+  py-flask-fastapi:                    # This is how we name our service
+    build: 	    
+        context: .
+        dockerfile: Dockerfile_python_cont  # supports bind mount	    
+    command: python app.py                  # The start-up command, this assumes that debugpy is start in the main Python app (recommend)
+#    command: python -m debugpy --listen 0.0.0.0:5670 app.py  # Start debugpy in the container by default, we start debugpy via the project source
+    ports:
+        - target: 8080                  # # Flask app port inside the container (debug or prod)
+          published: 5070               #  -Exposed host port for the Flask app
+        - target: 5670                  # Python debugger port inside container
+          published: 5670               #  - Exposed host port for remote debugging
+    environment:      
+      - FLASK_ENV=${debugModeOn}        # Adds development = Debug process to the app (One can access release also)
+      # - FLASK_ENV=${debugModeOff}     # Only supports production = Release (No debug options))
+      # - PYDEVD_DISABLE_FILE_VALIDATION=1  # Use if needed
+    networks:
+      - counter-net                     # Use this Network
+    volumes:                            # Use bind mount, so that changes on the host directly affect the files in the container
+       - type: bind                     # - ./app:/app  Alternative writing
+         source: ./app                  # Source folder on the host
+         target: /app                   # Target container directory. Changes locally are also affected in the container
+                                                
+  redis:                                # Remote Dictionary Server, IMS, create and store data strings
+    image: "redis:alpine"
+    networks:
+      - counter-net                     # Use this Network
+
+
+# To Start this container:
+# docker compose -f compose_python_cont.yml up -d
+#       *** BETTER FORCE *** a rebuild when config props are changed to avoid caching issues!!!!
+# docker-compose -f compose_python_cont.yml up -d --build --force-recreate

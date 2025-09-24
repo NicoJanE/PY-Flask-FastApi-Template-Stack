@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Restart Container",
+            "type": "shell",
+            "command": "Write-Host \"- Restarts container - fix Remote bug in VS code, since 2019`n- Debugs program`n- Choose manually File ->Stop to kill the process\" ; docker restart pythonwebservice-py-flask-fastapi-1;",
+            "presentation": {
+                "close": true
+            }                    
+        },
+        {
+            "label": "Kill Python in Container",
+            "type": "shell",
+            "command": "docker exec pythonwebservice-py-flask-fastapi-1 pkill -f app.py",
+            "presentation": {
+                "close": true
+            }                    
+        }
+        ,
+        {
+            "label": "Explain",
+            "type": "shell",
+            "command": "Write-Host \"- Local was not preffered cause the idea was to install al dependencies in docker and run it out of the box.`nWith local you have to install the python dependencies in Windows your self, see the documentation in the project.`nBut Remote run requres an docker restart due to a long standing bug!  \"",
+            "presentation": {
+                "close": false,
+                "reveal": "always",
+                "panel": "new"
+            }                    
+        }
+    ]
+}

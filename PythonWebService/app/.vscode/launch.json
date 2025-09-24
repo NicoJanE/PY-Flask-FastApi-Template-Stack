@@ -1,0 +1,34 @@
+{
+    // Use IntelliSense to learn about possible attributes.  PY-Remote-Docker  
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+{
+                "name": "PY-Local-Windows",
+                "type": "debugpy",
+                "request": "launch",
+                "program": "${workspaceFolder}/app.py",
+                "console": "integratedTerminal",
+                "preLaunchTask": "Explain",
+            },
+            {
+                "name": "PY-Remote-Docker",
+                "type": "debugpy",
+                "request": "attach",
+                "connect": {
+                    "host": "localhost",
+                    "port": 5670
+                },
+                "pathMappings": [
+                    {
+                        "localRoot": "${workspaceFolder}",
+                        "remoteRoot": "/app"
+                    }
+                ],
+                "justMyCode": true,
+                "preLaunchTask": "Restart Container",
+                "postDebugTask": "Kill Python in Container"
+            }
+    ]
+}

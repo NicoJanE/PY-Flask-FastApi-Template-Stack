@@ -45,7 +45,6 @@ This is a Python Flask application(template) . Besides Python it contains the fo
 
 We utilize VS Code on the Windows host for developing our Python Flask application, leveraging Docker for an isolated environment. The primary goal is to maintain source code in Windows while enabling cross-platform compatibility with Linux Docker remote builds. This guide outlines the workflow, including building the application both locally and in Docker, addressing known issues, and providing workarounds.
 
-<br>
 
 **Development Workflow**
 
@@ -57,7 +56,6 @@ We utilize VS Code on the Windows host for developing our Python Flask applicati
     - ***Local Building:***:
     Requires manual installation of dependencies on the Windows host, as outlined below. This method may be necessary for specific development tasks or troubleshooting.
 
-<br>
 
 **Required Local Dependencies for Windows**  
 
@@ -67,7 +65,6 @@ pip install redis flask jinja2 debugpy
 ```
 <small>Note: These packages correspond to the dependencies listed in the Docker container's `requirements` file.</small>
 
-<br>
 
 **Known Issues and Workarounds**
 

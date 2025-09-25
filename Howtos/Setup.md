@@ -76,7 +76,7 @@ Remote building from VS Code into Docker can present challenges, including:
 - These are solved by automatic VS Code task that will restart te container and shutdown the process after the debug session
 
 For detailed troubleshooting steps and workarounds, refer to the:
-more details  See file [`docker_python_vscode_debug.md`](docker_python_vscode_debug.md) in app folder and a copy in the Howto folder
+more detail documentation file [`docker_python_vscode_debug.md`](docker_python_vscode_debug.md) (A copy is available in the project `app` folder)
 
 
 ---

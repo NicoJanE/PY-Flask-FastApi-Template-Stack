@@ -9,4 +9,4 @@ This is a Python Flask application(template) . Besides Python it contains the fo
 
 ## Setup instruction
 
-For Setup instructions [see here](./Howtos/Setup)
+For Setup instructions [see here](https://nicojane.github.io/PY-Flask-FastApi-Template-Stack/Howtos/Setup)

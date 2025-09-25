@@ -8,7 +8,7 @@ This is a Python Flask application(template) . Besides Python it contains the fo
 
 ---
 
-## Install
+## 1. Install
 
 
 ><details>  
@@ -24,21 +24,22 @@ This is a Python Flask application(template) . Besides Python it contains the fo
 >
 > I use a Powershell script like this to search for me projects [see here](https://github.com/NicoJanE/Powershell-Utilities/blob/master/FindStringInFile/findp.ps1)
 
-> ---
-</details><br>
 
+</details>
+<br>
+
+- In `compose_python_cont.yml` check the if the **published port** (5070 and 5670) suits for needs 
 - Decide to run the container in release mode or Debug mode. In `compose_python_cont.yml` set:
-  - For **Debug mode** set FLASK_ENV = debugNOW_ON 
-  - For **Release mode** set FLASK_ENV = debugNOW_OFF 
-- Open a CLI the folder ` .\PythonWebService` and execute:  
-  `docker-compose -f compose_python_cont.yml up -d --build --force-recreate`
-- When Using **Release mode** you can enter in a browser: `localhost:5070`. 
-- For **Debug mode** read **VS Code** section below
-- After this the Python application is available in the folder `app` (Mount Bind)
+  - For **Debug mode** set FLASK_ENV = ${debugModeOn}   (default)
+  - For **Release mode** set FLASK_ENV =${debugModeOn} 
+- Open a CLI the folder ` .\PythonWebService` and execute:  ``docker-compose -f compose_python_cont.yml up -d --build --force-recreate``
+- When Using **Release mode** you can enter in a browser: [localhost:5070](localhost:5070)
+- For **Debug mode** read [**3. Using VS Code**](#3-using-vs-code) section before starting the site, after running the remote debug action in VS Code you should be able to attach to the Web Site  [localhost:5070](localhost:5070)
+- Also after installation the Python application is available in the (host) folder `./PythonWebService/app` (Mount Bind)
 
 ---
 
-## VS Code Development Workflow for Docker Template Project
+## 2. VS Code Development Workflow for Docker Template Project
 
 **Overview**
 
@@ -81,16 +82,11 @@ more detail documentation file [`docker_python_vscode_debug.md`](docker_python_v
 
 ---
 
-## Using VS Code
+## 3. Using VS Code
 
-**1. Install these required extensions**
+**1. Install these required extensions in VS Code**
 
 - code --install-extension ms-vscode-remote.remote-containers
-- code --install-extension ms-python.vscode-pylance
-- code --install-extension ms-python.python
-- code --install-extension charliermarsh.ruff
-- code --install-extension humao.rest-client
-- code --install-extension cweijan.vscode-database-client2
 
 <details>  
   <summary class="clickable-summary">
@@ -116,12 +112,22 @@ more detail documentation file [`docker_python_vscode_debug.md`](docker_python_v
 
 **2. Open template project in VS Code**
 
-- Open VSC and press the docker Icon(left sidebar)
-- Right Click on your container `pythonwebservice-py-flask-fastapi-1` and choose "Attache Visual Studio Code" a new VSC Window opens.
-- The use the **Open folder** command to open the **local** `app` folder in your project folder. IMPORTANT! Use local cause the VSC `Launch.json` and `task.json` will only work with these files
-- For debugging the code in **Appendix I** is required, this is already included in your template application 
-- Also for debugging the `debugpy python library` is required also this is already installed during the setup via the requirements filr(manuall setup `pip install debugpy`)
-- The `.vscode\launch.json` displayed in Appendix 2 is also already available so to debug the application select the debug button and make sure the option 'Python Debugger: Remote Attach' is selected. This should start the debug session
+- Open VSC and activate the extension tab **Remote Explorer**
+- Right Click on your container `pythonwebservice-py-flask-fastapi-1` and choose "Attache 
+in New Window" a new VSC Window opens with your container
+- The use the **Open folder** command to open the **local** `\.PythonWebService\app` folder in your project folder. IMPORTANT! Use local cause the VSC `Launch.json` and `task.json` will only work with these file
+- Make sure the following extensions are installed in the **Container**
+  - code --install-extension ms-python.vscode-pylance  (required)
+  - code --install-extension ms-python.python  (required)
+  - code --install-extension charliermarsh.ruff
+  - code --install-extension humao.rest-client
+  - code --install-extension cweijan.vscode-database-client2
+- Background information
+  - For debugging the code in **Appendix I** is required, this is already included in your template application 
+  - Also for debugging the `debugpy python library` is required also this is already installed during the setup via the requirements filr(manuall setup `pip install debugpy`)
+  - The `.vscode\launch.json` displayed in Appendix 2 is also already available so to debug the application select the debug button and make sure the option 'Python Debugger: Remote Attach' is selected. This should start the debug session
+- Use the remote debug instruction below.
+
 
 <br>
 
@@ -133,6 +139,8 @@ Due to a bug in VS Code (since 2019), we need to restart the container before ru
 
 1. In VS Code, select the "Run and Debug" tab.
 2. From the dropdown, select `PY-Remote-Docker` to start your debug session.
+
+Please not that the container gets restarted, before the debug run this can take a few seconds
 
 <br>
 

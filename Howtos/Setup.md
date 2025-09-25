@@ -24,18 +24,19 @@ This is a Python Flask application(template) . Besides Python it contains the fo
 >
 > I use a Powershell script like this to search for me projects [see here](https://github.com/NicoJanE/Powershell-Utilities/blob/master/FindStringInFile/findp.ps1)
 
-
 </details>
+
 <br>
 
 - In `compose_python_cont.yml` check the if the **published port** (5070 and 5670) suits for needs 
 - Decide to run the container in release mode or Debug mode. In `compose_python_cont.yml` set:
   - For **Debug mode** set FLASK_ENV = ${debugModeOn}   (default)
   - For **Release mode** set FLASK_ENV =${debugModeOn} 
-- Open a CLI the folder ` .\PythonWebService` and execute:  ``docker-compose -f compose_python_cont.yml up -d --build --force-recreate``
+- Open a CLI the folder `.\PythonWebService` and execute:  
+``docker-compose -f compose_python_cont.yml up -d --build --force-recreate``
 - When Using **Release mode** you can enter in a browser: [localhost:5070](localhost:5070)
 - For **Debug mode** read [**3. Using VS Code**](#3-using-vs-code) section before starting the site, after running the remote debug action in VS Code you should be able to attach to the Web Site  [localhost:5070](localhost:5070)
-- Also after installation the Python application is available in the (host) folder `./PythonWebService/app` (Mount Bind)
+- Note that after installation, the Python application is available in the (host) folder `./PythonWebService/app` (Mount Bind)
 
 ---
 
@@ -84,7 +85,7 @@ more detail documentation file [`docker_python_vscode_debug.md`](docker_python_v
 
 ## 3. Using VS Code
 
-**1. Install these required extensions in VS Code**
+**1. Install this required extensions in VS Code**
 
 - code --install-extension ms-vscode-remote.remote-containers
 
@@ -105,9 +106,6 @@ more detail documentation file [`docker_python_vscode_debug.md`](docker_python_v
 <small> Note: Alternatively, you can install them manually if preferred.</small>
 
 </details>
-
-
-<br>
 
 
 **2. Open template project in VS Code**

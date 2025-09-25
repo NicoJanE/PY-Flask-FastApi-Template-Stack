@@ -11,11 +11,11 @@ This is a Python Flask application(template) . Besides Python it contains the fo
 ## 1. Install
 
 
-><details>  
->  <summary class="clickable-summary">
->  <span  class="summary-icon"></span> <!-- Square Symbol -->
->  <b>&nbsp;&nbsp;&nbsp;&nbsp;Suggestion: Project markers</b>
->  </summary> <!-- On same line is failure -->
+<details>  
+  <summary class="clickable-summary">
+  <span  class="summary-icon"></span> <!-- Square Symbol -->
+  <b>&nbsp;&nbsp;&nbsp;&nbsp;Suggestion: Project markers</b>
+  </summary> <!-- On same line is failure -->
 >
 >You can mark your projects with one or more specific folders to make them easily searchable with your favorite search tool or script. I use the following folder markers:
 > - `.njerepo` Project is one of my own official GitHub repositories
@@ -26,7 +26,6 @@ This is a Python Flask application(template) . Besides Python it contains the fo
 
 </details>
 
-<br>
 
 - In `compose_python_cont.yml` check the if the **published port** (5070 and 5670) suits for needs 
 - Decide to run the container in release mode or Debug mode. In `compose_python_cont.yml` set:

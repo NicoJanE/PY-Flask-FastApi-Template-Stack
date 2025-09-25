@@ -71,11 +71,12 @@ pip install redis flask jinja2 debugpy
 **Known Issues and Workarounds**
 
 Remote building from VS Code into Docker can present challenges, including:
-- Intermittent connection issues between VS Code and the Docker container.
+- Connection issues between VS Code and the Docker container after the first run.
 - Debugging sessions may not terminate cleanly, requiring manual intervention.
+- These are solved by automatic VS Code task that will restart te container and shutdown the process after the debug session
 
 For detailed troubleshooting steps and workarounds, refer to the:
-more details  See file `DOCKER_VSC_WORKFLOW.md` in app folder and a copy in the Howto folder
+more details  See file [`docker_python_vscode_debug.md`](docker_python_vscode_debug.md) in app folder and a copy in the Howto folder
 
 
 ---

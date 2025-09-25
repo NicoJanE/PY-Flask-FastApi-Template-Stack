@@ -123,9 +123,7 @@ in New Window" a new VSC Window opens with your container
 - Use the remote debug instruction below.
 
 
-<br>
-
-**3. Remote WSL Debug and Run2**
+**3. Remote WSL Debug and Run**
 
 Due to a bug in VS Code (since 2019), we need to restart the container before running the application. After running, we must terminate the started process in the container for the same reason (hence the `ask.json` items). These steps will be performed automatically but will increase the startup and shutdown time for the debug and run process in the remote container.
 
@@ -136,8 +134,6 @@ Due to a bug in VS Code (since 2019), we need to restart the container before ru
 
 Please not that the container gets restarted, before the debug run this can take a few seconds
 
-<br>
-
 
 **4. Local Debug and Run**
 
@@ -146,8 +142,6 @@ Ensure the Python libraries are locally installed. Refer to the "Required Local 
 ***Steps:***
 
 1. From the dropdown, select `PY-Local-Windows` to start your debug session.
-
-
 
 
 <br><br>

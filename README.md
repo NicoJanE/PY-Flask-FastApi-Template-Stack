@@ -1,6 +1,6 @@
 # What
 
-This is a Python project application template using Flask and FastAPI in a WSL container
+This is a Python project application template using Flask and FastAPI in a **Docker** container
 
 
 ## Requirements

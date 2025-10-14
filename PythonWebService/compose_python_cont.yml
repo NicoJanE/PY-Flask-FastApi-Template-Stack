@@ -9,8 +9,8 @@ services:
     build: 	    
         context: .
         dockerfile: Dockerfile_python_cont  # supports bind mount	    
-    command: python app.py                  # The start-up command, this assumes that debugpy is start in the main Python app (recommend)
-#    command: python -m debugpy --listen 0.0.0.0:5670 app.py  # Start debugpy in the container by default, we start debugpy via the project source
+#    command: python src/app.py                  # The start-up command, this assumes that debugpy is start in the main Python app (recommend)
+    command: python -Xfrozen_modules=off -m debugpy --listen 0.0.0.0:5670 --wait-for-client src/app.py  # Start debugpy in the container by default, we start debugpy via the project source
     ports:
         - target: 8080                  # # Flask app port inside the container (debug or prod)
           published: 5070               #  -Exposed host port for the Flask app

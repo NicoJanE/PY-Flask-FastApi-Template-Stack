@@ -1,81 +1,48 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #444;
+/* CSS */
+html, body { margin: 0; padding: 0; }
+
+.banner {
+  position: relative;
+  width: 100vw;                       /* full viewport width */
+  margin-left: calc(50% - 50vw);      /* breakout from centered container */
+  height: 140px;                      /* fixed height you want */
+  overflow: hidden;
+  box-sizing: border-box;
+  background: linear-gradient(to right, #0044cc, #719db3); /* optional */
 }
-/*
- * Formatting the header area
- */
-header {
-  background-color: #48c1f5;
-  height: 35px;
+
+/* Image fills the banner area, cropped if needed */
+.banner-img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  opacity: .9;
-  margin-bottom: 10px;
+  height: 100%;
+  object-fit: cover;   /* preserve aspect ratio, crop to fill */
+  display: block;
 }
-header h1.logo {
-  margin: 0;
-  font-size: 1.7em;
-  color: #fff;
+
+/* Center text horizontally; position vertically via `top` */
+.banner-text {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 40px;           
   text-align: center;
-}
-header h1.logo:hover {
   color: #fff;
-  text-decoration: none;
+  font-size: 28px;
+  padding: 0 1rem;      /* small padding so it doesn't touch edges on mobile */
+  pointer-events: none; /* optional: text won't intercept clicks */
 }
-/*
- * Centering the body content
- */
+
 .container {
   width: 1200px;
-  margin: 0 auto;
-}
-div.home {
-  padding: 10px 0 30px 0;
-  background-color: #E6E6FA;
-  -webkit-border-radius: 6px;
-     -moz-border-radius: 6px;
-          border-radius: 6px;
-}
-div.about {
-  padding: 10px 0 30px 0;
-  background-color: #E6E6FA;
-  -webkit-border-radius: 6px;
-     -moz-border-radius: 6px;
-          border-radius: 6px;
-}
-h2 {
-  font-size: 3em;
-  margin-top: 40px;
-  text-align: center;
-  letter-spacing: -2px;
-}
-h3 {
-  font-size: 1.7em;
-  font-weight: 100;
-  margin-top: 30px;
-  text-align: center;
-  letter-spacing: -1px;
-  color: #999;
-}
-.menu {
-  float: right;
-  margin-top: 8px;
-}
-.menu li {
-  display: inline;
-}
-.menu li + li {
-  margin-left: 35px;
-}
-.menu li a {
-  color: #444;
-  text-decoration: none;
-}
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+  position: relative;
+  top: 15px;    /* move it down by 15px from where it normally appears */
+  left: 20px;   /* move it 20px to the right */
+  margin: 0;   
+
+  background-color: #f0f0f0;  /* light gray */
+  padding: 20px;                /* optional: adds space between text and edges */
+  border-radius: 18px;          /* optional: rounded corners  */
 }

@@ -8,7 +8,7 @@
                 "name": "PY-Local-Windows",
                 "type": "debugpy",
                 "request": "launch",
-                "program": "${workspaceFolder}/app.py",
+                "program": "${workspaceFolder}/src/app.py",
                 "console": "integratedTerminal",
                 "preLaunchTask": "Explain",
             },
@@ -22,8 +22,8 @@
                 },
                 "pathMappings": [
                     {
-                        "localRoot": "${workspaceFolder}",
-                        "remoteRoot": "/app"
+                        "localRoot": "${workspaceFolder}/src/",
+                        "remoteRoot": "/app/src"
                     }
                 ],
                 "justMyCode": true,

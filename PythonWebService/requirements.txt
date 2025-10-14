@@ -2,3 +2,4 @@ flask
 redis
 jinja2
 debugpy
+fastapi

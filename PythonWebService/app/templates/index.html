@@ -1,25 +1,58 @@
 <!DOCTYPE html>
+
+<!-- 
+Flask + Jinja2 Template Architecture Overview
+
+1. Template Functions:
+   - {{ url_for('rt_login') }} generates dynamic URL route (e.g., http://localhost:8081/rt_login)
+   - Variables like hostname, count, yourName are passed from the route handler
+   - url_for() with 'static' generates static file URLs
+
+2. Request Flow:
+   a) User submits form → POST request to /login route
+   b) AppRoutes.rt_login() method processes the request
+   c) Route calls render_template with variables
+   d) Jinja2 renders template by replacing variables with actual values
+   e) Final HTML is sent to user's browser
+
+3. Key Components:
+   - Routes defined in: src/routes/app/routes.py (AppRoutes class)
+   - Templates located in: templates/ directory
+   - Static files (CSS, images) in: static/ directory
+   - Jinja2 handles template rendering and variable substitution
+
+   More details in the document: `Tech-Stack-Essentials.md`
+
+-->
+
+
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Docker FTW</title>
+        <title>Project Template Python/Flask/Fast-API</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">        
     </head>
     <body>
-        <img src="/static/images/image.png" alt="NP logo" class="center">
-        <header>
-        <div class="container">
-            <h1 class="logo">Docker FTW</h1>
-        </div>
-        </header>
+    
+    <div class="banner">    <div class="banner-text"> Python Flask/Fast-API Project template</div> </div>
+    
+    <!--  Example alternative, using image
+    <div class="banner">
+        <img src="{{ url_for('static', filename='images/image.png') }}" alt="NP logo" class="banner-img">
+        <div class="banner-text">My Centered Text</div>
+    </div>
+    -->
     <div class="container">
-        <h2>Request served:) )  <b>{{ hostname }}</b></h2>
-        <h3>You've refreshed <b>{{ count }}</b> times</h3>
+        <h2>Request sent to host:  <b>{{ hostname }}</b></h2>
+        <h3>General refresh count: <b>{{ count_general }}</b> times</h3>
         <h3>Entered Name: <b>{{ yourName }}</b> </h3>
+        <h3>This user refresh count: <b>{{ count_user }}</b> </h3>
     </div>
 
-	<!-- Documentation is for dummies -->
-    <form action = "http://localhost:5070/login" method = "post">     
+    <br>
+	<!-- Documentation is for dummies, right? -->
+    <!--<form action = "http://localhost:5070/login" method = "post">   Is the same but lets's not hardcode things  -->
+	<form action = "{{ url_for('rt_login') }}" method = "post">    
     <table>
         <tr>
             <td width="20px"> </td> 
@@ -32,6 +65,25 @@
         </tr> 
     </table>
     </form>    
+
+    <!-- GET VERSION, use when retrieving/fetching data, can be cached by broser, length limit (2048 chars) sending/receiving  -->
+    <form action="{{ url_for('rt_login') }}" method="get">
+    <table>
+        <tr>
+        <td width="20px"> </td>
+        <td> Enter Name (Get version): </td>
+        </tr>
+        <tr>
+        <td width="20px"> </td>
+        <td>
+            <input type="text" name="nm2" />
+        </td>
+        <td>
+            <input type="submit" value="Apply" />
+        </td>
+        </tr>
+    </table>
+    </form>
        
   </body>
 </html>

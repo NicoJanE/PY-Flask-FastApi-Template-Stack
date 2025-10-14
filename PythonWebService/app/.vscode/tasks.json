@@ -12,7 +12,7 @@
         {
             "label": "Kill Python in Container",
             "type": "shell",
-            "command": "docker exec pythonwebservice-py-flask-fastapi-1 pkill -f app.py",
+            "command": "docker exec pythonwebservice-py-flask-fastapi-1 pkill -f src/app.py",
             "presentation": {
                 "close": true
             }                    

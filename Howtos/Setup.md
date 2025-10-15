@@ -154,36 +154,43 @@ Ensure the Python libraries are locally installed. Refer to the "Required Local 
   <span style="color:#409EFF; font-size:18px;">Debug Code</span>
 </h3> <br>
 
-This code is required to debug the application
-
-```
-import debugpy
-import os
-
-debugModeOn = False;
-if os.getenv('FLASK_ENV') == 'debugNOW_ON':
-    debugModeOn = True;
+This code is required to distinct between debug and release mode for Redis (file: `src\config\app_system.py`)
+``` python
+# Choose your 'redis' server based on the mode 
+# The default code use the same Docker server for release and production
+def get_redis_client(_port=6379):
+    """ Configure and return Redis client connection instance. Requires Redis server to be running before calling this function.
     
-def is_port_in_use(port):
-    import socket
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        return s.connect_ex(('localhost', port)) == 0
-
-if(debugModeOn):
-    debug_port = 5670
-    if not is_port_in_use(debug_port):            
-        debugpy.listen(('127.0.0.1', debug_port)) 
-        debugpy.wait_for_client()               
-        debugpy.breakpoint()        
-        print(f"Debugger is active on port {debug_port}")
-    else:        
-        print(f" Port {debug_port} is already in use, skipping debugpy setup.")
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080, debug=debugModeOn)   # Reload true in debug mode, monitors file in source(including sub directories) and reloads the server
-                                                            # so that changes are direct viewable for a developer without need to restart server manually (python concept feature) 
-                                                            
+    Environment Configuration:
+    - DEVELOPMENT: Uses localhost (start with: `sudo systemctl start redis`)
+    - PRODUCTION: Uses Docker container named 'redis'
+    
+    Features:
+    - Tests connection and reports status
+    - Environment-based host selection
+    - Connection error handling """
+    
+    
+    # Use 'redis' for production (Docker), 'localhost' for development
+    env = os.getenv('FLASK_ENV')
+    if env == 'production':
+        print_banner("Production mode detected: using Redis container", GREEN)
+        redis_host = 'redis'
+    else:
+        print_banner(f"Development mode (FLASK_ENV={env}): using Redis container", GREEN)
+        redis_host = 'redis'
+    
+    redis_client = redis.Redis(host=redis_host, port=_port)
+    
+    # Test the connection
+    try:
+        redis_client.ping()
+        print_banner(f"✅ Redis connection successful at {redis_host}:{_port}", GREEN)
+    except redis.ConnectionError:
+        print_banner(f"❌ Redis connection failed at {redis_host}:{_port}", RED)
+        print("Make sure Redis server is running!")
+    
+    return redis_client                                                            
 ```
 
 ---
@@ -196,18 +203,18 @@ if __name__ == "__main__":
 
 This is the used launch.json file for debbuging inside VS Code
 
-```
+``` json
 {
     // Use IntelliSense to learn about possible attributes.  PY-Remote-Docker  
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-    {
+{
                 "name": "PY-Local-Windows",
                 "type": "debugpy",
                 "request": "launch",
-                "program": "${workspaceFolder}/app.py",
+                "program": "${workspaceFolder}/src/app.py",
                 "console": "integratedTerminal",
                 "preLaunchTask": "Explain",
             },
@@ -221,8 +228,8 @@ This is the used launch.json file for debbuging inside VS Code
                 },
                 "pathMappings": [
                     {
-                        "localRoot": "${workspaceFolder}",
-                        "remoteRoot": "/app"
+                        "localRoot": "${workspaceFolder}/src/",
+                        "remoteRoot": "/app/src"
                     }
                 ],
                 "justMyCode": true,
@@ -235,7 +242,7 @@ This is the used launch.json file for debbuging inside VS Code
 ```
 In addition this `Task.json` is required 
 
-```
+``` json
 {
     "version": "2.0.0",
     "tasks": [
@@ -250,7 +257,7 @@ In addition this `Task.json` is required
         {
             "label": "Kill Python in Container",
             "type": "shell",
-            "command": "docker exec pythonwebservice-py-flask-fastapi-1 pkill -f app.py",
+            "command": "docker exec pythonwebservice-py-flask-fastapi-1 pkill -f src/app.py",
             "presentation": {
                 "close": true
             }                    

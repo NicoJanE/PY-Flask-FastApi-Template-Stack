@@ -1,6 +1,5 @@
 # Docker Python Debugging in VS Code: Issues & Fixes
 
-
 ## Key Issues and Solutions
 
 - **Remote Debugging**: VS Code’s remote debugging with Docker often requires manual container restarts. Use VS Code tasks to automate restarts and process termination.
@@ -9,12 +8,12 @@
 
 ## Practical Workflow Tips
 
-1. **Fast Development**: Use VS Code’s local launch configuration (`Python: Launch app.py`) and install dependencies with `pip install -r requirements.txt`.
-2. **Remote Debugging**: Set up VS Code tasks to restart Docker containers and kill processes before and after debugging sessions. Accept that this process is slower. Decide to use Docker primarily for integration testing and production-like runs.
+1. **Fast Development**: Use VS Code’s **local launch** configuration (`PY-Local-Windows`) and install dependencies using: `pip install -r requirements.txt`.
+2. **Remote Debugging**: Set up VS Code tasks to restart Docker containers and kill processes before and after debugging sessions. Accept that this process is slower. Decide to use Docker primarily for integration testing and production-like runs, this already configured like so, use Launch item: (`PY-Remote-Docker`).
 3. **Cross-Platform Consistency**: Keep Docker configurations and `requirements.txt` updated. Use Docker for integration tests and production environments.
 4. **Documentation & Onboarding**
 Document these limitations clearly. Share the workflow so other developers understand why both environments are needed.
-5. Consider using the WSL Python stack [see here TODO]() as an alternative workflow.
+5. Consider using the WSL Python stack [see here](https://nicojane.github.io/PY-Flask-FastApi-Template-WSL-Stack/) as an alternative workflow.
 This stack contains the same template project but runs entirely inside a WSL environment.
 It uses the Remote – WSL VS Code extension to build and debug directly inside WSL, avoiding many of the Docker remote-debugging limitations.
 

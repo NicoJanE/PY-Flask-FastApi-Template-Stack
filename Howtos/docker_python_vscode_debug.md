@@ -13,15 +13,15 @@
 3. **Cross-Platform Consistency**: Keep Docker configurations and `requirements.txt` updated. Use Docker for integration tests and production environments.
 4. **Documentation & Onboarding**
 Document these limitations clearly. Share the workflow so other developers understand why both environments are needed.
-5. Consider using the WSL Python stack [see here](https://nicojane.github.io/PY-Flask-FastApi-Template-WSL-Stack/) as an alternative workflow.
+5. Consider using the WSL Python container [see here](https://nicojane.github.io/PY-Flask-FastApi-Template-WSL-Stack/) as an alternative workflow.
 This stack contains the same template project but runs entirely inside a WSL environment.
 It uses the Remote – WSL VS Code extension to build and debug directly inside WSL, avoiding many of the Docker remote-debugging limitations.
 
 ## Summary
 
-While Docker and VS Code offer powerful tools for Python development, remote debugging presents challenges that require workarounds. Local debugging is recommended for rapid development, with Docker used for final testing and deployment.
+While Docker and VS Code offer powerful tools for Python development, remote debugging presents challenges that require workarounds(which are implemented). Local debugging can be considered for rapid development, with Docker remote building used for final testing and deployment. Alternatively one can consider to use the WSL container.
 
 ---
 
 
-<small>*Last Updated: 25 September 2025* </small>
+<small>*Last Updated: 16 Ocktober 2025* </small>
